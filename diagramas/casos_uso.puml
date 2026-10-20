@@ -1,0 +1,50 @@
+@startuml casos_uso
+' Diagrama de casos de uso — Ciclo 1 (Concepto, hito LCO)
+' Responsable: Arquitecto y modelador | Issue: HUEVO-4
+' Trazabilidad: docs/requerimientos.md (RF-01 a RF-10)
+
+title Problema de los huevos — Casos de uso (v0.2, Ciclo 1)
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #FDFBF7
+  BorderColor #555555
+}
+
+actor "Usuario\n(docente / evaluador)" as U
+
+rectangle "Simulador del problema de los huevos" {
+  usecase "UC-01 Ingresar huevos (H)\ny pisos (N)\n[RF-01]" as UC01
+  usecase "UC-02 Validar entradas\n[RF-09]" as UC02
+  usecase "UC-03 Calcular peor caso\nde búsqueda lineal\n[RF-02]" as UC03
+  usecase "UC-04 Calcular peor caso\nde búsqueda binaria\n[RF-03]" as UC04
+  usecase "UC-05 Calcular mínimo\nde lanzamientos\n[RF-04]" as UC05
+  usecase "UC-06 Ver secuencia de pisos\nde la estrategia óptima\n[RF-05]" as UC06
+  usecase "UC-07 Comparar estrategias\n[RF-06]" as UC07
+  usecase "UC-08 Simular búsqueda\npara un piso crítico\n[RF-07]" as UC08
+  usecase "UC-09 Ver gráfico de\nlanzamientos vs. huevos\n[RF-08]" as UC09
+  usecase "UC-10 Ver explicación\ndel modelo\n[RF-10]" as UC10
+}
+
+U --> UC01
+U --> UC07
+U --> UC08
+U --> UC09
+U --> UC10
+
+UC01 ..> UC02 : <<include>>
+UC07 ..> UC01 : <<include>>
+UC07 ..> UC03 : <<include>>
+UC07 ..> UC04 : <<include>>
+UC07 ..> UC05 : <<include>>
+UC06 ..> UC07 : <<extend>>
+UC08 ..> UC01 : <<include>>
+
+note right of UC05
+  La estrategia que alcanza el mínimo
+  aún NO está decidida (Ciclo 1).
+  Se elige en los Ciclos 2–3 tras
+  evaluar el riesgo RK-02.
+end note
+
+@enduml
