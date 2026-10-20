@@ -1,0 +1,47 @@
+@startuml actividad_binaria
+' Diagrama de actividad — Estrategia candidata B: búsqueda binaria con H huevos
+' Ciclo 1 (Concepto) | Responsable: Arquitecto y modelador | Issue: HUEVO-5
+' Trazabilidad: RF-03 | Riesgo: RK-02
+
+title Candidata B — Búsqueda binaria (limitada por H huevos)
+
+start
+:Recibir H huevos y N pisos;
+:bajo ← 1\nalto ← N\nhuevos ← H\nlanzamientos ← 0;
+
+while (¿bajo ≤ alto?) is (sí)
+  if (¿huevos = 1?) then (sí)
+    note right
+      Con un solo huevo ya no se
+      puede arriesgar: se pasa a
+      búsqueda lineal en [bajo, alto]
+    end note
+    :Recorrer lineal desde **bajo** hasta **alto**;
+    :Sumar lanzamientos de ese recorrido;
+    :Reportar k y lanzamientos;
+    stop
+  else (no)
+    :medio ← ⌊(bajo + alto) / 2⌋;
+    :Lanzar huevo desde **medio**;
+    :lanzamientos ← lanzamientos + 1;
+    if (¿Se rompió?) then (sí)
+      :huevos ← huevos − 1\nalto ← medio − 1;
+    else (no)
+      :bajo ← medio + 1;
+    endif
+  endif
+endwhile (no)
+
+:k ← bajo;
+:Reportar k y lanzamientos;
+stop
+
+legend right
+  **Con muchos huevos:** ≈ ⌈log₂(N+1)⌉ lanzamientos (7 con N = 100)
+  **Con 2 huevos:** si el primero se rompe en el piso 50,
+  el segundo recorre 1…49 → peor caso ≈ 50 lanzamientos
+  **Riesgo a evaluar en Ciclo 2 (RK-02):**
+  parece óptima, pero degrada con pocos huevos
+endlegend
+
+@enduml
