@@ -1,0 +1,39 @@
+@startuml actividad_lineal
+' Diagrama de actividad — Estrategia candidata A: búsqueda lineal
+' Ciclo 1 (Concepto) | Responsable: Arquitecto y modelador | Issue: HUEVO-5
+' Trazabilidad: RF-02 | Riesgo: RK-02
+
+title Candidata A — Búsqueda lineal (piso por piso)
+
+start
+:Recibir N pisos;
+if (¿N ≥ 1?) then (sí)
+  :piso ← 1\nlanzamientos ← 0;
+else (no)
+  :Mostrar error de validación;
+  stop
+endif
+
+while (¿piso ≤ N?) is (sí)
+  :Lanzar huevo desde **piso**;
+  :lanzamientos ← lanzamientos + 1;
+  if (¿Se rompió?) then (sí)
+    :k ← piso;
+    :Reportar k y lanzamientos;
+    stop
+  else (no)
+    :piso ← piso + 1;
+  endif
+endwhile (no)
+
+:k ← N + 1\n(no se rompe en ningún piso);
+:Reportar k y lanzamientos;
+stop
+
+legend right
+  **Peor caso:** N lanzamientos (100 con N = 100)
+  **Ventaja:** segura, usa 1 solo huevo
+  **Riesgo:** lenta; no aprovecha huevos extra
+endlegend
+
+@enduml

@@ -1,0 +1,60 @@
+@startuml actividad_optima
+' Diagrama de actividad — Estrategia candidata C: saltos según lanzamientos restantes
+' Ciclo 1 (Concepto) | Responsable: Arquitecto y modelador | Issue: HUEVO-5
+' Trazabilidad: RF-04, RF-05, RF-09 | Riesgos: RK-01, RK-02, RK-03
+' ESTADO: hipótesis. Su optimalidad se demuestra en el Ciclo 3.
+
+title Candidata C — Saltos según huevos y lanzamientos restantes (hipótesis)
+
+start
+:Recibir H huevos y N pisos;
+
+if (¿H ≥ 1 y N ≥ 1?) then (sí)
+else (no)
+  :Mostrar error de validación;
+  note right: RF-01 / RF-09 / RK-03
+  stop
+endif
+
+partition "Planificación: ¿cuántos lanzamientos bastan?" {
+  :t ← 0;
+  repeat
+    :t ← t + 1;
+    :Calcular f(H, t) = pisos que se pueden\ncubrir con H huevos y t lanzamientos;
+    note right
+      f(h, t) = f(h−1, t−1) + f(h, t−1) + 1
+      f(0, t) = f(h, 0) = 0
+    end note
+  repeat while (¿f(H, t) < N?) is (sí)
+  ->no;
+  :T ← t  (mínimo de lanzamientos en el peor caso);
+}
+
+partition "Ejecución: búsqueda del piso crítico" {
+  :base ← 0\nhuevos ← H\nrestantes ← T;
+  while (¿quedan pisos por revisar?) is (sí)
+    :piso ← base + f(huevos − 1, restantes − 1) + 1\n(acotado a N);
+    note right
+      Se salta exactamente lo que el resto
+      de huevos podría revisar si este se rompe
+    end note
+    :Lanzar huevo desde **piso**\nrestantes ← restantes − 1;
+    if (¿Se rompió?) then (sí)
+      :huevos ← huevos − 1\nRevisar pisos (base, piso);
+    else (no)
+      :base ← piso\nRevisar pisos (piso, N];
+    endif
+  endwhile (no)
+  :Reportar k, T y secuencia de pisos;
+}
+stop
+
+legend right
+  **Valores esperados (sección 9 de requerimientos):**
+  H=1 → 100 | H=2 → 14 | H=3 → 9 | H≥7 → 7  (N = 100)
+  **Secuencia H=2:** 14, 27, 39, 50, 60, 69, 77, 84, 90, 95, 99, 100
+  **Pendiente:** validar en Ciclo 2 frente a A y B,
+  demostrar optimalidad en Ciclo 3
+endlegend
+
+@enduml
