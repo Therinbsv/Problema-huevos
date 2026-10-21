@@ -190,5 +190,15 @@ Solo dos dependencias directas, cada una justificada por un requerimiento: Strea
 | Rol | Nombre | Decisión | Fecha |
 |---|---|---|---|
 | Arquitecto y modelador | | Elaborado | |
-| Desarrollador | | Revisado | |
+| Desarrollador backend | Matthew Redín | Revisado (viable, con observaciones DEV-01 a DEV-03) | 21/10/2026 |
 | Líder de proyecto | | Aprobado / Ajustar | |
+
+### Observaciones de la revisión técnica (Desarrollador backend, HUEVO-6)
+
+Verificación realizada: con Python 3.11+, `streamlit` y `pytest` instalados en un entorno virtual, la pila funciona y las pruebas de la rama `ciclo-2` pasan (66 passed). La separación `src/` y `app/` es viable: `src/` no importa `streamlit`.
+
+| ID | Observación | Propuesta |
+|---|---|---|
+| DEV-01 | La tabla inicial cita `docs/requerimientos.md`, pero el archivo se llama `docs/ciclo1_requerimientos.md`. | Corregir la referencia para no romper la trazabilidad. |
+| DEV-02 | La sección 3 lista `streamlit` y `pytest` sin versión, pero ADR-001 y RK-05 exigen versiones fijadas. | Usar rangos: `streamlit>=1.40,<2` y `pytest>=8,<9`. |
+| DEV-03 | La sección 2 dice "Un solo desarrollador", pero el equipo tiene backend y frontend. | Actualizar el texto; ADR-003 favorece esto, porque cada desarrollador trabaja en su capa (`src/` o `app/`) sin conflictos. |
