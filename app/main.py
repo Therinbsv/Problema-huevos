@@ -44,6 +44,14 @@ st.markdown(
     "desde el que un huevo se rompe, con el **menor número de lanzamientos en el peor caso**."
 )
 
+st.info(
+    "**¿Qué es el peor caso?** No sabemos desde qué piso se rompe el huevo. "
+    "El peor caso es la cantidad de lanzamientos que necesitas si ese piso está en el "
+    "lugar más difícil para tu estrategia: es lo que la estrategia **garantiza**. "
+    "Ejemplo: con 2 huevos, la binaria puede acertar en 2 lanzamientos con suerte, "
+    "pero si el piso crítico es el 49 necesita 50."
+)
+
 # ---------------------------------------------------------------- Entradas (RF-01)
 col_h, col_n = st.columns(2)
 h = col_h.slider("Huevos (H)", min_value=1, max_value=MAX_HUEVOS, value=2)
@@ -65,7 +73,7 @@ m1.metric("Búsqueda lineal", lineal, help="Lanza piso por piso desde el 1. Usa 
 m2.metric(
     "Búsqueda binaria",
     binaria,
-    delta=binaria - lineal,
+    delta=f"{binaria - lineal} vs. lineal" if binaria < lineal else None,
     delta_color="inverse",
     help="Lanza desde el piso medio; si queda un solo huevo, recorre el resto piso por piso.",
 )
