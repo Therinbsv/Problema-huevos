@@ -52,6 +52,6 @@ Entregado en la rama `ciclo-2`:
 
 | Rol | Nombre | Decisión | Fecha |
 |---|---|---|---|
-| QA y validación | | Pruebas aprobadas | |
-| Analista de requisitos y riesgos | | RK-02 confirmado | |
-| Líder de proyecto | | Continuar al Ciclo 3 | |
+| QA y validación | Josselyn Pozo| Pruebas aprobadas |20/10/2026 |
+| Analista de requisitos y riesgos | Josué Quintana| RK-02 confirmado |20/10/2026|
+| Líder de proyecto | Jorge Revelo| Continuar al Ciclo 3 |20/10/2026 |
