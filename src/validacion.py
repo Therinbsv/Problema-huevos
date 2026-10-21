@@ -19,22 +19,22 @@ def _es_entero(valor) -> bool:
 def validar_pisos(n) -> int:
     """Valida el número de pisos N (1 ≤ N ≤ MAX_PISOS)."""
     if not _es_entero(n):
-        raise EntradaInvalida("El número de pisos debe ser un número entero.")
+        raise EntradaInvalida(f"El número de pisos debe ser un número entero (se recibió: {n!r}).")
     if n < 1:
-        raise EntradaInvalida("El edificio debe tener al menos 1 piso.")
+        raise EntradaInvalida(f"El edificio debe tener al menos 1 piso (se recibió: {n}).")
     if n > MAX_PISOS:
-        raise EntradaInvalida(f"El número de pisos no puede superar {MAX_PISOS}.")
+        raise EntradaInvalida(f"El número de pisos no puede superar {MAX_PISOS} (se recibió: {n}).")
     return n
 
 
 def validar_huevos(h) -> int:
     """Valida el número de huevos H (1 ≤ H ≤ MAX_HUEVOS)."""
     if not _es_entero(h):
-        raise EntradaInvalida("El número de huevos debe ser un número entero.")
+        raise EntradaInvalida(f"El número de huevos debe ser un número entero (se recibió: {h!r}).")
     if h < 1:
-        raise EntradaInvalida("Se necesita al menos 1 huevo.")
+        raise EntradaInvalida(f"Se necesita al menos 1 huevo (se recibió: {h}).")
     if h > MAX_HUEVOS:
-        raise EntradaInvalida(f"El número de huevos no puede superar {MAX_HUEVOS}.")
+        raise EntradaInvalida(f"El número de huevos no puede superar {MAX_HUEVOS} (se recibió: {h}).")
     return h
 
 
