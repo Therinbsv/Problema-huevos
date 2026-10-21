@@ -51,7 +51,10 @@ Motivo: Pendiente de decisión del equipo en la reunión de cierre.
 
 ## Aprobación
 
-| Rol | Nombre | Fecha |
-|---|---|---|
-| Líder de proyecto | | |
-| Gestor de configuración y documentación | | |
+
+| Rol | Nombre | Decisión | Fecha |
+|---|---|---|---|
+| Analista de requisitos y riesgos | Josue Quintana| Elaborado | 20/10/2026|
+| Arquitecto y modelador | Anayomi Quishpe| Revisado | 20/10/2026|
+| Líder de proyecto | Jorge Revelo| Continuar  | 20/10/2026|
+| Docente | Ing. Patricio Paccha| Validado |20/10/2026 |
