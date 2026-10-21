@@ -1,7 +1,7 @@
 @startuml casos_uso
 ' Diagrama de casos de uso — Ciclo 1 (Concepto, hito LCO)
 ' Responsable: Arquitecto y modelador | Issue: HUEVO-4
-' Trazabilidad: docs/requerimientos.md (RF-01 a RF-10)
+' Trazabilidad: docs/ciclo1_requerimientos.md (RF-01 a RF-10)
 
 title Problema de los huevos — Casos de uso (v0.2, Ciclo 1)
 left to right direction

@@ -57,6 +57,7 @@ El objetivo es **encontrar k con el menor número de lanzamientos posible en el 
 | S5 | Es posible que el huevo no se rompa en ningún piso (k > N). |
 | S6 | Un lanzamiento es cualquier tiro de un huevo, se rompa o no. |
 | S7 | Se mide el **peor caso**, no el promedio ni el mejor caso. |
+| S8 | El piso crítico k puede tomar valores entre 1 y N+1. Si k = 1, el huevo se rompe desde el primer piso; si k = N+1, no se rompe en ningún piso del edificio. |
 
 ## 6. Requerimientos funcionales
 
@@ -68,7 +69,7 @@ Prioridad según MoSCoW: **M** = Must (obligatorio), **S** = Should (debería), 
 | RF-02 | El sistema debe calcular el número de lanzamientos en el peor caso de la búsqueda **lineal**. | M | 2 |
 | RF-03 | El sistema debe calcular el número de lanzamientos en el peor caso de la búsqueda **binaria**, respetando el límite de H huevos. | M | 2 |
 | RF-04 | El sistema debe calcular el **número mínimo** de lanzamientos en el peor caso para cualquier H y N. | M | 3 |
-| RF-05 | El sistema debe generar la **secuencia de pisos** desde los que se lanza el primer huevo en la estrategia óptima. | M | 3 |
+| RF-05 | El sistema debe generar la secuencia inicial de pisos de lanzamiento de la estrategia óptima y permitir determinar los lanzamientos siguientes según los resultados anteriores, respetando la cantidad de huevos disponibles. | M | 3 |
 | RF-06 | El sistema debe **comparar** en una misma vista los resultados de todas las estrategias para los valores ingresados. | M | 4 |
 | RF-07 | El sistema debe **simular** la búsqueda paso a paso para un piso crítico elegido por el usuario, mostrando cada lanzamiento y su resultado. | S | 4 |
 | RF-08 | El sistema debe mostrar un **gráfico** de lanzamientos según el número de huevos. | S | 4 |
@@ -116,7 +117,7 @@ Prioridad según MoSCoW: **M** = Must (obligatorio), **S** = Should (debería), 
 
 | ID | Riesgo | Probabilidad | Impacto | Mitigación | Req. afectados |
 |---|---|---|---|---|---|
-| RK-01 | Malinterpretar el problema (por ejemplo, optimizar el promedio en lugar del peor caso) | Media | Alto | Supuestos S1–S7 explícitos y validación con el docente antes del Ciclo 2 | RF-02 a RF-05 |
+| RK-01 | Malinterpretar el problema (por ejemplo, optimizar el promedio en lugar del peor caso) | Media | Alto | Supuestos S1–S8 explícitos y validación con el docente antes del Ciclo 2 | RF-02 a RF-05 |
 | RK-02 | Elegir una estrategia subóptima como solución general | Alta | Alto | Prototipar y comparar estrategias en el Ciclo 2 antes de comprometer la solución | RF-03, RF-04 |
 | RK-03 | Casos borde no contemplados (0 huevos, 1 piso, más huevos que pisos) | Media | Medio | Incluirlos en los criterios de aceptación y en las pruebas | RF-09, RNF-01 |
 | RK-04 | La demo no se entiende sin explicación | Media | Medio | Prueba de usabilidad con usuarios externos en el Ciclo 4 | RF-06, RNF-03 |
@@ -132,7 +133,9 @@ Prioridad según MoSCoW: **M** = Must (obligatorio), **S** = Should (debería), 
 | RF-05 | RK-01 | actividad_optima.puml | test_secuencia | 3 |
 | RF-06 | RK-04 | componentes.puml | prueba de usabilidad | 4 |
 | RF-07 | RK-04 | casos_uso.puml | test_simulacion | 4 |
+| RF-08 | RK-04 | Pendiente de definir | Prueba de visualización del gráfico (planificada) | 4 |
 | RF-09 | RK-03 | actividad_optima.puml | test_validacion | 3 |
+| RF-10 | RK-04 | Pendiente de definir | Revisión de contenido explicativo (planificada) | 4 |
 
 > Las columnas de diagrama y prueba se completan a medida que avanzan los ciclos. El gestor de documentación actualiza esta matriz en cada release.
 
@@ -150,7 +153,7 @@ Prioridad según MoSCoW: **M** = Must (obligatorio), **S** = Should (debería), 
 
 | Rol | Nombre | Decisión | Fecha |
 |---|---|---|---|
-| Analista de requisitos y riesgos | | Elaborado | |
+| Analista de requisitos y riesgos | Josue Quintana| Elaborado | 20/10/2026|
 | Arquitecto y modelador | | Revisado | |
 | Líder de proyecto | | Continuar / Ajustar / Abortar | |
 | Docente | | Validado | |

@@ -2,6 +2,17 @@
 
 Proyecto académico: encontrar el piso crítico en un edificio de N pisos con H huevos, minimizando los lanzamientos en el peor caso, aplicando el modelo en espiral de Boehm.
 
+## Equipo
+
+| Rol | Nombre |
+|---|---|
+| Líder de proyecto | Jorge Revelo |
+| Analista de requisitos y riesgos | Josue Quintana |
+| Arquitecto y modelador | Anayomi Quishpe |
+| Desarrollador backend y Gestor (repositorio, ramas y releases) | Matthew Redín |
+| Desarrollador frontend y Gestor (actas, README, informe y publicación) | Katherine Sánchez |
+| QA y validación | Josselin Pozo |
+
 ## Estado
 
 | Ciclo | Contenido | Release |

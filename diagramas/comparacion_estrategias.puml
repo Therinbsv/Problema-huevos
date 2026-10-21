@@ -1,0 +1,35 @@
+@startuml comparacion_estrategias
+' Diagrama de comparación — Ciclo 1 (Concepto)
+' Responsable: Arquitecto y modelador | Issue: HUEVO-4
+' Trazabilidad: RF-02, RF-03, RF-04, RF-05 | Riesgo: RK-02
+
+title Comparación de estrategias — 2 huevos, 100 pisos (peor caso)
+
+skinparam monochrome false
+skinparam defaultFontSize 13
+skinparam rectangle {
+  BackgroundColor #FDFBF7
+  BorderColor #555555
+}
+
+rectangle "**A — Lineal**\n(1 huevo)\n\n100 lanzamientos\n\nSegura pero lenta" as A #FDE2E2
+rectangle "**B — Binaria**\n(2 huevos)\n\n≈ 50 lanzamientos\nsi rompe en el 50\n\nDegrada con pocos huevos" as B #FFF3CD
+rectangle "**De 10 en 10**\n(2 huevos)\n\n19 lanzamientos\n(10 + 9)\n\nMejora, pero no óptima" as C #FFE8CC
+rectangle "**C — Candidata (DP, hipótesis)**\n(2 huevos)\n\n14 lanzamientos esperados\n\nSaltos: 14,13,12,…\nSecuencia: 14→27→…→100" as D #D4EDDA
+
+A -right-> B : mejor
+B -right-> C : mejor
+C -right-> D : **hipótesis por validar**
+
+note bottom of D
+  Por qué 14 y no 13:
+  13+12+…+1 = 91 < 100
+  14+13+…+1 = 105 ≥ 100
+end note
+
+note bottom of A
+  Valores esperados (N=100):
+  H=1 → 100 | H=2 → 14 | H=3 → 9 | H≥7 → 7
+end note
+
+@enduml

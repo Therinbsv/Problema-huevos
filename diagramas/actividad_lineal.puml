@@ -7,8 +7,12 @@ title Candidata A — Búsqueda lineal (piso por piso)
 
 start
 :Recibir N pisos;
-note right: Funciona con cualquier H ≥ 1\n(solo arriesga 1 huevo a la vez)
-:piso ← 1\nlanzamientos ← 0;
+if (¿N ≥ 1?) then (sí)
+  :piso ← 1\nlanzamientos ← 0;
+else (no)
+  :Mostrar error de validación;
+  stop
+endif
 
 while (¿piso ≤ N?) is (sí)
   :Lanzar huevo desde **piso**;
