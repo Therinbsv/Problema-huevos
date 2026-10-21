@@ -7,7 +7,12 @@ title Candidata B — Búsqueda binaria (limitada por H huevos)
 
 start
 :Recibir H huevos y N pisos;
-:bajo ← 1\nalto ← N\nhuevos ← H\nlanzamientos ← 0;
+if (¿H ≥ 1 y N ≥ 1?) then (sí)
+  :bajo ← 1\nalto ← N\nhuevos ← H\nlanzamientos ← 0;
+else (no)
+  :Mostrar error de validación;
+  stop
+endif
 
 while (¿bajo ≤ alto?) is (sí)
   if (¿huevos = 1?) then (sí)
@@ -16,8 +21,18 @@ while (¿bajo ≤ alto?) is (sí)
       puede arriesgar: se pasa a
       búsqueda lineal en [bajo, alto]
     end note
-    :Recorrer lineal desde **bajo** hasta **alto**;
-    :Sumar lanzamientos de ese recorrido;
+    while (¿bajo ≤ alto?) is (sí)
+      :Lanzar huevo desde **bajo**;
+      :lanzamientos ← lanzamientos + 1;
+      if (¿Se rompió?) then (sí)
+        :k ← bajo;
+        :Reportar k y lanzamientos;
+        stop
+      else (no)
+        :bajo ← bajo + 1;
+      endif
+    endwhile (no)
+    :k ← bajo;
     :Reportar k y lanzamientos;
     stop
   else (no)
