@@ -101,3 +101,10 @@ def test_rendimiento_dentro_de_un_segundo():
     peor_caso_binaria(10, 1000)
     peor_caso_lineal(1000)
     assert time.perf_counter() - inicio < 1.0
+
+# ------------------------------------------------------------- Prueba propia de QA (Ciclo 2)
+
+@pytest.mark.parametrize("n, esperado", [(10, 5), (36, 18), (50, 25), (200, 100)])
+def test_qa_binaria_con_2_huevos_necesita_la_mitad(n, esperado):
+    """QA: con 2 huevos, la binaria tira el primero en la mitad; si se rompe, recorre el resto linealmente."""
+    assert peor_caso_binaria(2, n) == esperado
