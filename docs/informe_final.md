@@ -27,7 +27,7 @@ En un edificio de N pisos se dispone de H huevos idénticos. Existe un piso crí
 | Analista de requisitos y riesgos | Josue Quintana | Jira (riesgos) | Requerimientos y registro de riesgos RK-01 a RK-04 |
 | Arquitecto y modelador | Anayomi Quishpe | PlantUML | Diagramas y decisiones técnicas (ADR) |
 | Desarrollador backend y gestor (repositorio, ramas y releases) | Matthew Redín | VS Code + GitHub | Implementación de `src/`, ramas y releases |
-| Desarrollador frontend y gestor (actas, README, informe y publicación) | *COMPLETAR: verificar con la tabla Equipo del README* | VS Code + Streamlit | Implementación de `app/`, actas, informe y publicación |
+| Desarrollador frontend y gestor (actas, README, informe y publicación) | Katherine Sánchez| VS Code + Streamlit | Implementación de `app/`, actas, informe y publicación |
 | QA y validación | Josselin Pozo | GitHub (PR y pruebas) | Pruebas automáticas y prueba de usabilidad |
 
 ## 4. Herramientas
@@ -49,7 +49,7 @@ Las alternativas descartadas (Java, JavaScript, pandas, Plotly, FastAPI + Uvicor
 | 1 — Concepto (LCO) | Entender el problema y modelar las alternativas | RK-01 Malinterpretar el problema | Requerimientos, ADR y 4 diagramas; 3 estrategias candidatas | Avanzar a prototipos | `v0.1-ciclo1` |
 | 2 — Estrategias simples (LCA) | Probar lineal y binaria | RK-02 Estrategia subóptima | Binaria: 50 lanzamientos con 2 huevos frente a 14 de referencia | Descartar la binaria y avanzar con la estrategia óptima | `v0.2-ciclo2` |
 | 3 — Modelo óptimo | Implementar y demostrar la óptima | RK-03 Casos borde | 14, 9 y 7 lanzamientos con 2, 3 y 7 huevos; el peor caso medido por simulación exhaustiva coincide con el cálculo. Al revisar la interfaz se detectó que los pisos resaltados no se entendían y que usaba CSS propio (incumplía R-02) | Avanzar al producto rediseñando la interfaz | `v0.3-ciclo3` |
-| 4 — Producto (IOC) | Interfaz comprensible y completa | RK-04 Usabilidad | App con juego, comparador, gráfico y explicación; 171 pruebas; prueba con usuarios externos | *COMPLETAR en la reunión de cierre* | `v1.0` |
+| 4 — Producto (IOC) | Interfaz comprensible y completa | RK-04 Usabilidad | App con juego, comparador, gráfico y explicación; 171 pruebas; prueba con usuarios externos | Avanzar pruebas con usuarios externos | `v1.0` |
 
 El detalle de cada ciclo está en su acta: `docs/ciclo2_decision.md`, `docs/ciclo3_acta.md` y `docs/ciclo4_acta.md`.
 
