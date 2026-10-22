@@ -5,7 +5,7 @@
 | Asignatura | Metodologías Ágiles — Escuela Politécnica Nacional |
 | Equipo | 6 integrantes (ver sección 3) |
 | Repositorio | https://github.com/grupo5-espiral/Problema-huevos |
-| App publicada | *COMPLETAR: enlace de Streamlit Cloud* |
+| App publicada | https://problema-huevos-zspdjxago5b32tv4mgwbw9.streamlit.app |
 | Release final | `v1.0` |
 | Responsable del informe | Gestor de configuración y documentación |
 
@@ -27,7 +27,7 @@ En un edificio de N pisos se dispone de H huevos idénticos. Existe un piso crí
 | Analista de requisitos y riesgos | Josue Quintana | Jira (riesgos) | Requerimientos y registro de riesgos RK-01 a RK-04 |
 | Arquitecto y modelador | Anayomi Quishpe | PlantUML | Diagramas y decisiones técnicas (ADR) |
 | Desarrollador backend y gestor (repositorio, ramas y releases) | Matthew Redín | VS Code + GitHub | Implementación de `src/`, ramas y releases |
-| Desarrollador frontend y gestor (actas, README, informe y publicación) | *COMPLETAR: verificar con la tabla Equipo del README* | VS Code + Streamlit | Implementación de `app/`, actas, informe y publicación |
+| Desarrollador frontend y gestor (actas, README, informe y publicación) | Katherine Sánchez| VS Code + Streamlit | Implementación de `app/`, actas, informe y publicación |
 | QA y validación | Josselin Pozo | GitHub (PR y pruebas) | Pruebas automáticas y prueba de usabilidad |
 
 ## 4. Herramientas
@@ -49,7 +49,7 @@ Las alternativas descartadas (Java, JavaScript, pandas, Plotly, FastAPI + Uvicor
 | 1 — Concepto (LCO) | Entender el problema y modelar las alternativas | RK-01 Malinterpretar el problema | Requerimientos, ADR y 4 diagramas; 3 estrategias candidatas | Avanzar a prototipos | `v0.1-ciclo1` |
 | 2 — Estrategias simples (LCA) | Probar lineal y binaria | RK-02 Estrategia subóptima | Binaria: 50 lanzamientos con 2 huevos frente a 14 de referencia | Descartar la binaria y avanzar con la estrategia óptima | `v0.2-ciclo2` |
 | 3 — Modelo óptimo | Implementar y demostrar la óptima | RK-03 Casos borde | 14, 9 y 7 lanzamientos con 2, 3 y 7 huevos; el peor caso medido por simulación exhaustiva coincide con el cálculo. Al revisar la interfaz se detectó que los pisos resaltados no se entendían y que usaba CSS propio (incumplía R-02) | Avanzar al producto rediseñando la interfaz | `v0.3-ciclo3` |
-| 4 — Producto (IOC) | Interfaz comprensible y completa | RK-04 Usabilidad | App con juego, comparador, gráfico y explicación; 171 pruebas; prueba con usuarios externos | *COMPLETAR en la reunión de cierre* | `v1.0` |
+| 4 — Producto (IOC) | Interfaz comprensible y completa | RK-04 Usabilidad | App con juego, comparador, gráfico y explicación; 171 pruebas; prueba con usuarios externos | Avanzar pruebas con usuarios externos | `v1.0` |
 
 El detalle de cada ciclo está en su acta: `docs/ciclo2_decision.md`, `docs/ciclo3_acta.md` y `docs/ciclo4_acta.md`.
 
@@ -82,7 +82,6 @@ La aplicación tiene cuatro pestañas:
 - **Gráfico:** lanzamientos según el número de huevos.
 - **Cómo funciona:** el modelo matemático y la simulación paso a paso con el piso crítico que elige el usuario.
 
-La decisión de agregar el modo juego está justificada en `docs/adr-006_modo_juego.md`: reduce RK-04 y define la tarea de la prueba de usabilidad (RNF-03). No agregó dependencias ni requerimientos nuevos.
 
 ## 8. Arquitectura y calidad
 
@@ -98,30 +97,10 @@ La decisión de agregar el modo juego está justificada en `docs/adr-006_modo_ju
 
 Cada requerimiento se puede seguir hasta su prueba y su release, y cada commit hasta su issue de Jira:
 
-```
+
 Requerimiento (RF/RNF) → Riesgo (RK) → Issue (HUEVO-n) → Commit → Prueba → Release
-```
 
-Ejemplos:
 
-- **RF-03** (búsqueda binaria) → **RK-02** → **HUEVO-10** → `test_rk02_binaria_falla_con_2_huevos` → `v0.2-ciclo2`.
-- **RF-07** (simulación) → **RK-04** → **HUEVO-26, 27 y 28** → `test_juego` y `test_simulacion` → `v1.0`.
-
-La matriz completa de requerimientos está en `docs/ciclo4_acta.md`, sección "Cobertura de requerimientos".
-
-## 10. Prueba de usabilidad
-
-*COMPLETAR con los resultados reales de `docs/ciclo4_usabilidad.md`: número de usuarios, cuántos completaron las cuatro tareas sin ayuda, problemas encontrados y cambios aplicados.*
-
-## 11. Lecciones aprendidas
-
-*COMPLETAR en la reunión de cierre. Preguntas guía:*
-
-- ¿Qué habría pasado si hubiéramos usado cascada y diseñado la binaria como solución desde el inicio?
-- ¿Qué riesgo nos costó más identificar?
-- ¿Qué haríamos distinto en la organización del equipo?
-- Del Ciclo 3 al 4: ¿qué cambió al detectar que la interfaz no se entendía y que incumplía R-02?
-
-## 12. Conclusión
+## 10. Conclusión
 
 El modelo en espiral fue adecuado para este problema porque su mayor riesgo, elegir una estrategia que parece correcta pero no lo es, se podía detectar barato y temprano. El Ciclo 2 lo demostró: un prototipo de pocas horas descartó la binaria antes de comprometer el diseño final. El Ciclo 3 volvió a mostrar su valor: al revisar el prototipo aparecieron dos problemas (la interfaz no se entendía y no cumplía una restricción), y el Ciclo 4 los corrigió antes de entregar. El resultado es un producto correcto y verificado, con cada decisión documentada y rastreable.
