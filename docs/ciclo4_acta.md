@@ -7,8 +7,8 @@
 | Épica Jira | HUEVO-17 |
 | Responsable del documento | Gestor de configuración y documentación |
 | Decisión | Líder de proyecto |
-| Fecha de la reunión de cierre | *COMPLETAR: fecha real de la reunión* |
-| Asistentes | *COMPLETAR: nombres de quienes asistieron* |
+| Fecha de la reunión de cierre | 21/20/2026 |
+| Asistentes | Josselyn Pozo , Josue Quintana, Anayomi Quishpe, Matthew Redin, Jorge Revelo, Katherine Sánchez |
 
 ## Qué heredamos y qué aprendimos
 
@@ -44,7 +44,7 @@ Entregar un simulador comparativo que el docente pueda usar sin explicación, co
 
 | Riesgo | Estado anterior | Estado actual | Evidencia |
 |---|---|---|---|
-| RK-04 La demo no se entiende sin explicación (HUEVO-19) | Abierto; el prototipo del Ciclo 3 ya mostró el problema | *COMPLETAR después de la prueba de usabilidad* | `docs/ciclo4_usabilidad.md` |
+| RK-04 La demo no se entiende sin explicación (HUEVO-19) | Abierto; el prototipo del Ciclo 3 ya mostró el problema | En curso: se evaluán las refectorizaciones| `docs/ciclo4_usabilidad.md` |
 | Incumplimiento de R-02 en el prototipo del Ciclo 3 (`st.html` con CSS propio) | Detectado en la revisión | Corregido: la interfaz usa solo componentes nativos y una imagen de Pillow | Búsqueda de `st.html` y `unsafe_allow_html` en `app/` sin resultados |
 | El modo juego crece sin respaldo (alcance) | Posible | Controlado: alcance congelado y decisión documentada | `docs/adr-006_modo_juego.md` |
 
@@ -86,10 +86,10 @@ Entregado en la rama `ciclo-4`:
 
 | Opción | Decisión |
 |---|---|
-| Entregar `v1.0` | *COMPLETAR en la reunión* |
-| Ajustar antes de entregar | *COMPLETAR si la prueba de usabilidad encontró problemas* |
+| Entregar `v1.0` | Listo para entregar |
+| Ajustar antes de entregar | No se requiere ajustes |
 
-**Enlace de la app publicada:** *COMPLETAR: enlace de Streamlit Cloud*
+
 
 ## Aprobación
 
