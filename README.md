@@ -1,5 +1,7 @@
 # Problema de los huevos — Modelo en espiral
 
+[![Pruebas](https://github.com/grupo5-espiral/Problema-huevos/actions/workflows/pruebas.yml/badge.svg)](https://github.com/grupo5-espiral/Problema-huevos/actions/workflows/pruebas.yml)
+
 Proyecto académico: encontrar el piso crítico en un edificio de N pisos con H huevos, minimizando los lanzamientos en el peor caso, aplicando el modelo en espiral de Boehm.
 
 ## Equipo
@@ -19,18 +21,29 @@ Proyecto académico: encontrar el piso crítico en un edificio de N pisos con H 
 |---|---|---|
 | 1 — Concepto (LCO) | Requerimientos, decisiones técnicas, diagramas | `v0.1-ciclo1` |
 | 2 — Estrategias simples (LCA) | Lineal y binaria, pruebas, prototipo | `v0.2-ciclo2` |
-| 3 — Modelo óptimo | Pendiente | |
+| 3 — Modelo óptimo | 🔄 en revisión | `v0.3-ciclo3` |
 | 4 — Producto (IOC) | Pendiente | |
+
+Ciclo 3 pasará a ✅ cuando se fusione el Pull Request.
 
 ## Estructura
 
 ```
 app/        Interfaz (Streamlit)
 src/        Lógica del problema, sin dependencias de interfaz
+            estrategias.py: estrategias lineal, binaria y óptima (RF-04, RF-05)
 tests/      Pruebas (pytest)
 docs/       Requerimientos, decisiones técnicas, actas por ciclo
+            ciclo3_acta.md: acta del ciclo 3 — Modelo óptimo
 diagramas/  PlantUML
 ```
+
+## Documentación
+
+| Archivo | Contenido |
+|---|---|
+| `docs/ciclo3_acta.md` | Objetivos, riesgos, resultados, trazabilidad y decisión del Ciclo 3 |
+| `src/estrategias.py` | Estrategias lineal y binaria; estrategia óptima (RF-04, RF-05) |
 
 ## Cómo ejecutarlo
 
