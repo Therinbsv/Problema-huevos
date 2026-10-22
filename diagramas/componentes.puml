@@ -1,22 +1,28 @@
 @startuml componentes
-' Arquitectura del Ciclo 3 | Issue: HUEVO-23 | ADR-003
+' Arquitectura final de la app | Ciclo 4 | HUEVO-30
 
-title Diagrama de componentes — Ciclo 3
+title Diagrama de componentes — App final (v2.0, Ciclo 4)
 top to bottom direction
 skinparam packageStyle rectangle
 
 package "app/" {
-  component "main.py\nInterfaz Streamlit" as app
+  component "main.py\nInterfaz Streamlit con 4 pestañas:\nSimular, Comparar, Gráfico\ny Cómo funciona" as app
+  component "escena.py\nDibuja el edificio y los huevos\n(Pillow)" as escena
 }
 
 package "src/" {
-  component "estrategias.py\nLineal, binaria y óptima" as estrategias
-  component "validacion.py\nValidación de H y N" as validacion
+  component "estrategias.py\nLineal, binaria y óptima\nPeores casos, mínimo y secuencia" as estrategias
+  component "simulacion.py\nPaso a paso de cada estrategia\npara un piso crítico" as simulacion
+  component "juego.py\nPartida interactiva:\nlanzar, estados y evaluación" as juego
+  component "validacion.py\nValidación de H, N y pisos críticos" as validacion
 }
 
 package "tests/" {
   component "test_estrategias.py" as test_estrategias
   component "test_optima.py" as test_optima
+  component "test_simulacion.py" as test_simulacion
+  component "test_juego.py" as test_juego
+  component "test_escena.py" as test_escena
   component "test_validacion.py" as test_validacion
 }
 
@@ -24,20 +30,36 @@ package "GitHub Actions\n.github/workflows/" {
   component "pruebas.yml\nInstala dependencias y ejecuta pytest" as acciones
 }
 
-app --> estrategias : consulta estrategias y resultados
-app --> validacion : valida entradas
+app --> escena : dibuja la escena
+app --> estrategias : peor caso, mínimo y secuencia
+app --> simulacion : pestaña Cómo funciona
+app --> juego : pestaña Simular
+app --> validacion : MAX_HUEVOS
+
+simulacion --> estrategias : usa las reglas
+simulacion --> validacion : valida entradas
+juego --> estrategias : mínimo y simulación óptima
+juego --> validacion : valida entradas
 estrategias --> validacion : valida parámetros
 
 test_estrategias --> estrategias : prueba
 test_optima --> estrategias : prueba
+test_optima --> validacion
+test_simulacion --> simulacion : prueba
+test_juego --> juego : prueba
+test_escena --> escena : prueba
 test_validacion --> validacion : prueba
-acciones --> test_estrategias : ejecuta pytest en PR y push a main
+
+acciones --> test_estrategias : ejecuta pytest\nen PR y push a main
 acciones --> test_optima
+acciones --> test_simulacion
+acciones --> test_juego
+acciones --> test_escena
 acciones --> test_validacion
 
 legend bottom
   Las flechas indican dependencias: el componente de origen llama o ejecuta al destino.
-  La capa app/ consume src/; las pruebas verifican src/ y GitHub Actions las ejecuta.
+  La interfaz consume src/; las pruebas verifican la lógica y GitHub Actions las ejecuta.
 endlegend
 
 @enduml
