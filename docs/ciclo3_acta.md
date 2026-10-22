@@ -71,13 +71,13 @@ La secuencia con 2 huevos y 100 pisos es: **14, 27, 39, 50, 60, 69, 77, 84, 90, 
 | RF-09 | RK-03 | `diagramas/actividad_optima.puml` | `tests/test_optima.py::test_min_lanzamientos_entradas_invalidas` | 3 |
 
 ## C4 — Planificación y decisión
+| Rol | Nombre | Decisión | Fecha |
+|---|---|---|---|
+| QA y validación | Josselyn Pozo | Pruebas aprobadas (100 passed) | 21/10/2026 |
+| Analista de requisitos y riesgos | Josue Quintana | RK-02 cerrado, RK-03 mitigado, RK-01 reforzado | 21/10/2026 |
+| Arquitecto y modelador | Anayomi Quishpe | Diagramas coherentes con el código | 21/10/2026 |
+| Líder de proyecto | Jorge Revelo | Continuar al Ciclo 4 | 21/10/2026 |
 
-| Opción | Decisión |
-|---|---|
-| Continuar | |
-| Ajustar | |
-| Abortar | |
-
-**Decisión del líder:**  
+**Decisión del líder: Continuar al Ciclo 4**  
 
 **Siguiente ciclo — Producto (Ciclo 4):** completar el simulador, el comparador, el gráfico y la explicación; realizar una prueba de usabilidad con usuarios externos.
