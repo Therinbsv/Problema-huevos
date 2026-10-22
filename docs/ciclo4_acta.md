@@ -7,6 +7,11 @@
 | Épica Jira | HUEVO-17 |
 | Responsable del documento | Gestor de configuración y documentación |
 | Decisión | Líder de proyecto |
+<<<<<<< HEAD
+=======
+| Fecha de la reunión de cierre | 21/20/2026 |
+| Asistentes | Josselyn Pozo , Josue Quintana, Anayomi Quishpe, Matthew Redin, Jorge Revelo, Katherine Sánchez |
+>>>>>>> 54fb0ac3ad41e05848289c83f8a198c4a9c9383a
 
 
 ## Qué heredamos
@@ -37,9 +42,15 @@ Entregar un simulador comparativo que el docente pueda usar sin explicación, co
 
 | Riesgo | Estado anterior | Estado actual | Evidencia |
 |---|---|---|---|
+<<<<<<< HEAD
 | RK-04 La demo no se entiende sin explicación (HUEVO-19) | Abierto; el prototipo del Ciclo 3 ya mostró el problema |- | - |
 
 
+=======
+| RK-04 La demo no se entiende sin explicación (HUEVO-19) | Abierto; el prototipo del Ciclo 3 ya mostró el problema | En curso: se evaluán las refectorizaciones| `docs/ciclo4_usabilidad.md` |
+| Incumplimiento de R-02 en el prototipo del Ciclo 3 (`st.html` con CSS propio) | Detectado en la revisión | Corregido: la interfaz usa solo componentes nativos y una imagen de Pillow | Búsqueda de `st.html` y `unsafe_allow_html` en `app/` sin resultados |
+| El modo juego crece sin respaldo (alcance) | Posible | Controlado: alcance congelado y decisión documentada | `docs/adr-006_modo_juego.md` |
+>>>>>>> 54fb0ac3ad41e05848289c83f8a198c4a9c9383a
 
 ## C3 — Desarrollo y pruebas
 
@@ -75,6 +86,15 @@ Entregado en la rama `ciclo-4`:
 | RNF-07 | Cada commit con `HUEVO-n` | pestaña *Desarrollo* de Jira |
 
 
+<<<<<<< HEAD
 
 **Enlace de la app publicada: (https://problema-huevos-zspdjxago5b32tv4mgwbw9.streamlit.app)
+=======
+| Opción | Decisión |
+|---|---|
+| Entregar `v1.0` | Listo para entregar |
+| Ajustar antes de entregar | No se requiere ajustes |
+
+
+>>>>>>> 54fb0ac3ad41e05848289c83f8a198c4a9c9383a
 
