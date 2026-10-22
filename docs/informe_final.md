@@ -82,7 +82,6 @@ La aplicación tiene cuatro pestañas:
 - **Gráfico:** lanzamientos según el número de huevos.
 - **Cómo funciona:** el modelo matemático y la simulación paso a paso con el piso crítico que elige el usuario.
 
-La decisión de agregar el modo juego está justificada en `docs/adr-006_modo_juego.md`: reduce RK-04 y define la tarea de la prueba de usabilidad (RNF-03). No agregó dependencias ni requerimientos nuevos.
 
 ## 8. Arquitectura y calidad
 
