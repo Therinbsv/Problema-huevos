@@ -1,12 +1,13 @@
-"""Prototipo del Ciclo 2 — Búsqueda lineal vs. búsqueda binaria.
+"""Prototipo del Ciclo 3 — Estrategia óptima.
 
 Capa de presentación: solo lee entradas, llama a src/ y muestra resultados.
-No contiene fórmulas de cálculo (RNF-04, ADR-003).
+No contiene fórmulas de cálculo (RNF-04, ADR-003): el dibujo del edificio solo
+ordena y pinta los pisos que devuelve secuencia_pisos().
 
 Ejecutar desde la raíz del repositorio:
-    streamlit run app/main.py
+    python -m streamlit run app/main.py
 
-Trazabilidad: RF-01, RF-02, RF-03, RF-09 | Riesgo evaluado: RK-02
+Trazabilidad: RF-01 a RF-05, RF-09 | Riesgos: RK-02, RK-03 | Issue: HUEVO-24
 """
 
 import sys
@@ -17,13 +18,18 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.estrategias import (  # noqa: E402
+    min_lanzamientos,
     peor_caso_binaria,
     peor_caso_lineal,
-    simular_binaria,
+    secuencia_pisos,
 )
 from src.validacion import MAX_HUEVOS, MAX_PISOS, EntradaInvalida, validar_entrada  # noqa: E402
 
-st.set_page_config(page_title="Problema de los huevos — Ciclo 2", page_icon="🥚", layout="centered")
+PISOS_POR_FILA = 10
+MAX_PISOS_DIBUJO = 300  # más pisos se muestran solo como texto
+MAX_PISOS_EN_TEXTO = 30
+
+st.set_page_config(page_title="Problema de los huevos — Ciclo 3", page_icon="🥚", layout="wide")
 
 
 @st.cache_data
@@ -33,87 +39,142 @@ def tabla_por_huevos(n: int) -> dict[str, list[int]]:
         "Huevos": huevos,
         "Lineal": [peor_caso_lineal(n)] * len(huevos),
         "Binaria": [peor_caso_binaria(h, n) for h in huevos],
+        "Óptima": [min_lanzamientos(h, n) for h in huevos],
     }
 
 
+def html_resultado(lanzamientos: int, h: int, n: int) -> str:
+    """Tarjeta grande con el resultado de la estrategia óptima."""
+    return f"""
+    <div style="border:2px solid #f59f00;border-radius:12px;padding:18px 22px;
+                background:rgba(245,159,0,0.12);margin:6px 0 10px 0;">
+      <div style="font-size:0.8rem;letter-spacing:0.08em;opacity:0.75;">ESTRATEGIA ÓPTIMA</div>
+      <div style="font-size:3rem;font-weight:800;line-height:1.1;">{lanzamientos}
+        <span style="font-size:1.2rem;font-weight:600;">lanzamientos garantizados</span></div>
+      <div style="opacity:0.8;">Con {h} huevo(s) y {n} pisos.</div>
+    </div>
+    """
+
+
+def html_edificio(n: int, pisos_de_lanzamiento: list[int]) -> str:
+    """Cuadrícula de pisos: el piso 1 abajo y los pisos de la secuencia resaltados."""
+    ordenados = {piso: orden for orden, piso in enumerate(pisos_de_lanzamiento, start=1)}
+    filas = -(-n // PISOS_POR_FILA)  # techo de n / 10
+    celdas = []
+    for fila in range(filas - 1, -1, -1):  # la fila de arriba primero
+        for col in range(PISOS_POR_FILA):
+            piso = fila * PISOS_POR_FILA + col + 1
+            if piso > n:
+                celdas.append("<div></div>")
+            elif piso in ordenados:
+                celdas.append(
+                    f'<div title="Lanzamiento {ordenados[piso]} del primer huevo: piso {piso}" '
+                    'style="background:#f59f00;color:#1b1b1b;font-weight:800;border-radius:4px;'
+                    f'padding:7px 0;text-align:center;font-size:0.85rem;">{piso}</div>'
+                )
+            else:
+                celdas.append(
+                    '<div style="background:rgba(128,128,128,0.16);opacity:0.6;border-radius:4px;'
+                    f'padding:7px 0;text-align:center;font-size:0.75rem;">{piso}</div>'
+                )
+    return f"""
+    <div style="max-width:520px;">
+      <div style="text-align:center;font-size:0.8rem;opacity:0.7;margin-bottom:4px;">
+        ▲ Piso {n}</div>
+      <div style="display:grid;grid-template-columns:repeat({PISOS_POR_FILA},1fr);gap:4px;
+                  border:2px solid rgba(128,128,128,0.5);border-radius:8px;padding:8px;">
+        {"".join(celdas)}
+      </div>
+      <div style="text-align:center;font-size:0.8rem;opacity:0.7;margin-top:4px;">
+        ▼ Piso 1 (planta baja)</div>
+    </div>
+    """
+
+
+def texto_secuencia(secuencia: list[int]) -> str:
+    if len(secuencia) <= MAX_PISOS_EN_TEXTO:
+        return ", ".join(str(piso) for piso in secuencia)
+    inicio = ", ".join(str(piso) for piso in secuencia[:MAX_PISOS_EN_TEXTO])
+    return f"{inicio}, … ({len(secuencia)} lanzamientos en total)"
+
+
+# ---------------------------------------------------------------- Encabezado
 st.title("🥚 Problema de los huevos")
-st.caption("Prototipo del Ciclo 2 · Evaluación de estrategias simples (hito LCA)")
-
+st.caption("Prototipo del Ciclo 3 · Estrategia óptima")
 st.markdown(
-    "En un edificio de **N** pisos, con **H** huevos, hay que encontrar el piso más bajo "
-    "desde el que un huevo se rompe, con el **menor número de lanzamientos en el peor caso**."
+    "Encuentra el piso más bajo desde el que un huevo se rompe, "
+    "con el **menor número de lanzamientos en el peor caso**."
 )
 
-st.info(
-    "**¿Qué es el peor caso?** No sabemos desde qué piso se rompe el huevo. "
-    "El peor caso es la cantidad de lanzamientos que necesitas si ese piso está en el "
-    "lugar más difícil para tu estrategia: es lo que la estrategia **garantiza**. "
-    "Ejemplo: con 2 huevos, la binaria puede acertar en 2 lanzamientos con suerte, "
-    "pero si el piso crítico es el 49 necesita 50."
-)
+izquierda, derecha = st.columns([5, 6], gap="large")
 
-# ---------------------------------------------------------------- Entradas (RF-01)
-col_h, col_n = st.columns(2)
-h = col_h.slider("Huevos (H)", min_value=1, max_value=MAX_HUEVOS, value=2)
-n = col_n.number_input("Pisos (N)", min_value=1, max_value=MAX_PISOS, value=100, step=1)
-
-try:
-    h, n = validar_entrada(int(h), int(n))
-except EntradaInvalida as error:  # RF-09
-    st.error(str(error))
-    st.stop()
-
-# ---------------------------------------------------------------- Resultados (RF-02, RF-03)
-lineal = peor_caso_lineal(n)
-binaria = peor_caso_binaria(h, n)
-
-st.subheader("Lanzamientos en el peor caso")
-m1, m2 = st.columns(2)
-m1.metric("Búsqueda lineal", lineal, help="Lanza piso por piso desde el 1. Usa un solo huevo.")
-m2.metric(
-    "Búsqueda binaria",
-    binaria,
-    delta=f"{binaria - lineal} vs. lineal" if binaria < lineal else None,
-    delta_color="inverse",
-    help="Lanza desde el piso medio; si queda un solo huevo, recorre el resto piso por piso.",
-)
-
-if h <= 3:
-    st.warning(
-        f"Con {h} huevo(s), la búsqueda binaria necesita **{binaria}** lanzamientos. "
-        "Cuando se rompe el primer huevo en un piso alto, el resto debe revisarse piso por piso. "
-        "La binaria **no aprovecha bien pocos huevos** (riesgo RK-02)."
-    )
-else:
+# ---------------------------------------------------------------- Columna izquierda
+with izquierda:
     st.info(
-        f"Con {h} huevos la binaria funciona bien ({binaria} lanzamientos), "
-        "pero el caso exigido por el problema es con pocos huevos."
+        "**¿Qué es el peor caso?** No sabemos desde qué piso se rompe el huevo. "
+        "El peor caso es la cantidad de lanzamientos que necesitas si ese piso está en el "
+        "lugar más difícil para tu estrategia: es lo que la estrategia **garantiza**."
     )
 
-# ---------------------------------------------------------------- Comparación por huevos
+    h = st.slider("Huevos (H)", min_value=1, max_value=MAX_HUEVOS, value=2)  # RF-01
+
+    with st.expander("Opciones avanzadas"):
+        n = st.number_input(  # RF-01
+            "Pisos (N)", min_value=1, max_value=MAX_PISOS, value=100, step=1,
+            help="El problema clásico usa 100 pisos.",
+        )
+
+    try:
+        h, n = validar_entrada(int(h), int(n))  # RF-09
+    except EntradaInvalida as error:
+        st.error(str(error))
+        st.stop()
+
+    lineal = peor_caso_lineal(n)  # RF-02
+    binaria = peor_caso_binaria(h, n)  # RF-03
+    optima = min_lanzamientos(h, n)  # RF-04
+    secuencia = secuencia_pisos(h, n)  # RF-05
+
+    st.html(html_resultado(optima, h, n))
+
+    st.markdown("**Frente a las otras estrategias** (evidencia del Ciclo 2)")
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Lineal", lineal)
+    c2.metric("Binaria", binaria)
+    c3.metric("Óptima", optima)
+
+    if optima < binaria:
+        st.success(
+            f"Con {h} huevo(s), la óptima garantiza **{optima}** lanzamientos, "
+            f"frente a **{binaria}** de la binaria."
+        )
+    else:
+        st.info(f"Con {h} huevo(s) la binaria ya alcanza el mínimo ({binaria} lanzamientos).")
+
+# ---------------------------------------------------------------- Columna derecha
+with derecha:
+    st.subheader("El edificio")
+    st.markdown(
+        "Los pisos **resaltados** son los que usa la estrategia óptima para lanzar el primer huevo. "
+        "Mientras no se rompa, sube al siguiente resaltado; cuando se rompe, los huevos que quedan "
+        "revisan los pisos intermedios."
+    )
+    if n <= MAX_PISOS_DIBUJO:
+        st.html(html_edificio(n, secuencia))
+    else:
+        st.info(f"Con {n} pisos el edificio es demasiado grande para dibujarlo; se muestra solo la secuencia.")
+    st.markdown("**Secuencia de pisos:**")
+    st.markdown(texto_secuencia(secuencia))
+
+# ---------------------------------------------------------------- Gráfico comparativo
+st.divider()
 st.subheader("¿Cómo cambia con el número de huevos?")
 datos = tabla_por_huevos(n)
-st.line_chart(datos, x="Huevos", y=["Lineal", "Binaria"], y_label="Lanzamientos (peor caso)")
+st.line_chart(datos, x="Huevos", y=["Lineal", "Binaria", "Óptima"], y_label="Lanzamientos (peor caso)")
 with st.expander("Ver tabla"):
     st.table(datos)
 
-# ---------------------------------------------------------------- Peor caso paso a paso
-st.subheader("El peor caso de la binaria, paso a paso")
-peor_k = max(range(1, n + 2), key=lambda k: len(simular_binaria(h, n, k)))
-recorrido = simular_binaria(h, n, peor_k)
-texto_k = f"piso {peor_k}" if peor_k <= n else "no se rompe en ningún piso"
-st.markdown(f"Piso crítico que produce el peor caso: **{texto_k}** → **{len(recorrido)}** lanzamientos.")
-with st.expander("Ver lanzamientos"):
-    st.table(
-        {
-            "Lanzamiento": list(range(1, len(recorrido) + 1)),
-            "Piso": [piso for piso, _ in recorrido],
-            "Resultado": ["Se rompe" if rompio else "No se rompe" for _, rompio in recorrido],
-        }
-    )
-
-st.divider()
 st.caption(
-    "Conclusión del Ciclo 2: la búsqueda lineal es segura pero lenta y la binaria degrada con pocos "
-    "huevos. Ninguna de las dos es la solución general; se avanza a la candidata C en el Ciclo 3."
+    "Ciclo 3: la estrategia óptima se valida con los valores de referencia y con una búsqueda por "
+    "fuerza bruta (tests/test_optima.py). El Ciclo 4 agrega el simulador y la explicación."
 )
