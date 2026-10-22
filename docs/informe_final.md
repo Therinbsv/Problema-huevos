@@ -13,7 +13,7 @@
 
 El equipo resolvió el problema de los huevos aplicando el modelo en espiral de Boehm en 4 ciclos. Cada ciclo redujo un riesgo antes de construir el siguiente. El hallazgo central llegó en el Ciclo 2: la búsqueda binaria, que parecía la solución natural, necesita **50 lanzamientos** con 2 huevos y 100 pisos, mientras que la estrategia óptima necesita **14**. Ese riesgo se detectó con un prototipo barato, y el rumbo se corrigió antes de invertir en la solución final.
 
-El producto es una aplicación web en Streamlit con un juego en el que el usuario busca el piso crítico y compara su resultado con la estrategia óptima, además de un comparador de estrategias, un gráfico y la explicación del modelo. Tiene 171 pruebas automáticas que se ejecutan en cada Pull Request.
+El producto es una aplicación web en Streamlit con un juego en el que el usuario busca el piso crítico y compara su resultado con la estrategia óptima, además de un comparador de estrategias, un gráfico y la explicación del modelo. Tiene 170 pruebas automáticas que se ejecutan en cada Pull Request.
 
 ## 2. El problema
 
@@ -49,7 +49,7 @@ Las alternativas descartadas (Java, JavaScript, pandas, Plotly, FastAPI + Uvicor
 | 1 — Concepto (LCO) | Entender el problema y modelar las alternativas | RK-01 Malinterpretar el problema | Requerimientos, ADR y 4 diagramas; 3 estrategias candidatas | Avanzar a prototipos | `v0.1-ciclo1` |
 | 2 — Estrategias simples (LCA) | Probar lineal y binaria | RK-02 Estrategia subóptima | Binaria: 50 lanzamientos con 2 huevos frente a 14 de referencia | Descartar la binaria y avanzar con la estrategia óptima | `v0.2-ciclo2` |
 | 3 — Modelo óptimo | Implementar y demostrar la óptima | RK-03 Casos borde | 14, 9 y 7 lanzamientos con 2, 3 y 7 huevos; el peor caso medido por simulación exhaustiva coincide con el cálculo. Al revisar la interfaz se detectó que los pisos resaltados no se entendían y que usaba CSS propio (incumplía R-02) | Avanzar al producto rediseñando la interfaz | `v0.3-ciclo3` |
-| 4 — Producto (IOC) | Interfaz comprensible y completa | RK-04 Usabilidad | App con juego, comparador, gráfico y explicación; 171 pruebas; prueba con usuarios externos | Avanzar pruebas con usuarios externos | `v1.0` |
+| 4 — Producto (IOC) | Interfaz comprensible y completa | RK-04 Usabilidad | App con juego, comparador, gráfico y explicación; 170 pruebas; prueba con usuarios externos | Avanzar pruebas con usuarios externos | `v1.0` |
 
 El detalle de cada ciclo está en su acta: `docs/ciclo2_decision.md`, `docs/ciclo3_acta.md` y `docs/ciclo4_acta.md`.
 
@@ -86,7 +86,7 @@ La aplicación tiene cuatro pestañas:
 ## 8. Arquitectura y calidad
 
 - **Dos capas** (`diagramas/componentes.puml`): `src/` contiene la lógica pura y `app/` solo la presentación. El edificio se dibuja con Pillow y se muestra como imagen, sin HTML, CSS ni JavaScript propios (R-02).
-- **171 pruebas automáticas** con pytest, ejecutadas por GitHub Actions en cada Pull Request:
+- **170 pruebas automáticas** con pytest, ejecutadas por GitHub Actions en cada Pull Request:
     - valores de referencia;
     - simulación de todos los pisos críticos posibles;
     - reglas del juego (huevos, ganar y perder, rango válido);
