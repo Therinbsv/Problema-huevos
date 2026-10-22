@@ -95,8 +95,8 @@ Entregado en la rama `ciclo-4`:
 
 | Rol | Nombre | Decisión | Fecha |
 |---|---|---|---|
-| QA y validación | | Pruebas y usabilidad aprobadas | |
-| Arquitecto y modelador | | Diseño final revisado | |
-| Analista de requisitos y riesgos | | RK-04 cerrado | |
-| Gestor de configuración y documentación | | Informe y release `v1.0` | |
-| Líder de proyecto | | Proyecto entregado | |
+| QA y validación | Josselyn Pozo| Pruebas y usabilidad aprobadas |21/10/2026 |
+| Arquitecto y modelador | Anayomi Quishpe| Diseño final revisado |21/10/2026 |
+| Analista de requisitos y riesgos |Josué Quintana | RK-04 cerrado |21/10/2026 |
+| Gestor de configuración y documentación |Katherine Sánchez | Informe y release `v1.0` |21/10/2026 |
+| Líder de proyecto | Jorge Revelo| Proyecto entregado | 21/10/2026|
