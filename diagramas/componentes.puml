@@ -1,0 +1,43 @@
+@startuml componentes
+' Arquitectura del Ciclo 3 | Issue: HUEVO-23 | ADR-003
+
+title Diagrama de componentes — Ciclo 3
+top to bottom direction
+skinparam packageStyle rectangle
+
+package "app/" {
+  component "main.py\nInterfaz Streamlit" as app
+}
+
+package "src/" {
+  component "estrategias.py\nLineal, binaria y óptima" as estrategias
+  component "validacion.py\nValidación de H y N" as validacion
+}
+
+package "tests/" {
+  component "test_estrategias.py" as test_estrategias
+  component "test_optima.py" as test_optima
+  component "test_validacion.py" as test_validacion
+}
+
+package "GitHub Actions\n.github/workflows/" {
+  component "pruebas.yml\nInstala dependencias y ejecuta pytest" as acciones
+}
+
+app --> estrategias : consulta estrategias y resultados
+app --> validacion : valida entradas
+estrategias --> validacion : valida parámetros
+
+test_estrategias --> estrategias : prueba
+test_optima --> estrategias : prueba
+test_validacion --> validacion : prueba
+acciones --> test_estrategias : ejecuta pytest en PR y push a main
+acciones --> test_optima
+acciones --> test_validacion
+
+legend bottom
+  Las flechas indican dependencias: el componente de origen llama o ejecuta al destino.
+  La capa app/ consume src/; las pruebas verifican src/ y GitHub Actions las ejecuta.
+endlegend
+
+@enduml

@@ -1,10 +1,10 @@
 @startuml actividad_optima
-' Diagrama de actividad — Estrategia candidata C: saltos según lanzamientos restantes
-' Ciclo 1 (Concepto) | Responsable: Arquitecto y modelador | Issue: HUEVO-5
+' Diagrama de actividad — Estrategia C: saltos según lanzamientos restantes
+' Ciclo 3 (Modelo óptimo) | Responsable: Arquitecto y modelador | Issue: HUEVO-23
 ' Trazabilidad: RF-04, RF-05, RF-09 | Riesgos: RK-01, RK-02, RK-03
-' ESTADO: hipótesis. Su optimalidad se demuestra en el Ciclo 3.
+' ESTADO: validada con la recurrencia de cobertura y pruebas exhaustivas.
 
-title Candidata C — Saltos según huevos y lanzamientos restantes (hipótesis)
+title Estrategia óptima — Saltos según huevos y lanzamientos restantes (validada)
 
 start
 :Recibir H huevos y N pisos;
@@ -50,11 +50,13 @@ partition "Ejecución: búsqueda del piso crítico" {
 stop
 
 legend right
-  **Valores esperados (sección 9 de requerimientos):**
-  H=1 → 100 | H=2 → 14 | H=3 → 9 | H≥7 → 7  (N = 100)
+  **Evidencia del Ciclo 3 (N = 100):**
+  H=1 → 100 | H=2 → 14 | H=3 → 9 | H=7 → 7 lanzamientos
   **Secuencia H=2:** 14, 27, 39, 50, 60, 69, 77, 84, 90, 95, 99, 100
-  **Pendiente:** validar en Ciclo 2 frente a A y B,
-  demostrar optimalidad en Ciclo 3
+  **Validación:** el mínimo calculado por f(h,t) coincide con el
+  peor caso medido al simular todos los pisos críticos (tests/test_optima.py).
+  La recurrencia acota los pisos resolubles en cada lanzamiento;
+  el menor t con f(H,t) ≥ N es el óptimo.
 endlegend
 
 @enduml
