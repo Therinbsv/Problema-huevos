@@ -55,8 +55,12 @@ legend right
   **Con muchos huevos:** ≈ ⌈log₂(N+1)⌉ lanzamientos (7 con N = 100)
   **Con 2 huevos:** si el primero se rompe en el piso 50,
   el segundo recorre 1…49 → peor caso ≈ 50 lanzamientos
-  **Riesgo a evaluar en Ciclo 2 (RK-02):**
-  parece óptima, pero degrada con pocos huevos
+  **Resultados medidos en el Ciclo 2 (N = 100):**
+  2 huevos: 50 lanzamientos
+  3 huevos: 26 lanzamientos
+
+  **Riesgo evaluado (RK-02):**
+  la estrategia degrada con pocos huevos
 endlegend
 
 @enduml
