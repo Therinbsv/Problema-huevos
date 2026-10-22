@@ -5,7 +5,7 @@
 | Asignatura | Metodologías Ágiles — Escuela Politécnica Nacional |
 | Equipo | 6 integrantes (ver sección 3) |
 | Repositorio | https://github.com/grupo5-espiral/Problema-huevos |
-| App publicada | *COMPLETAR: enlace de Streamlit Cloud* |
+| App publicada | https://problema-huevos-zspdjxago5b32tv4mgwbw9.streamlit.app |
 | Release final | `v1.0` |
 | Responsable del informe | Gestor de configuración y documentación |
 
@@ -98,30 +98,10 @@ La decisión de agregar el modo juego está justificada en `docs/adr-006_modo_ju
 
 Cada requerimiento se puede seguir hasta su prueba y su release, y cada commit hasta su issue de Jira:
 
-```
+
 Requerimiento (RF/RNF) → Riesgo (RK) → Issue (HUEVO-n) → Commit → Prueba → Release
-```
 
-Ejemplos:
 
-- **RF-03** (búsqueda binaria) → **RK-02** → **HUEVO-10** → `test_rk02_binaria_falla_con_2_huevos` → `v0.2-ciclo2`.
-- **RF-07** (simulación) → **RK-04** → **HUEVO-26, 27 y 28** → `test_juego` y `test_simulacion` → `v1.0`.
-
-La matriz completa de requerimientos está en `docs/ciclo4_acta.md`, sección "Cobertura de requerimientos".
-
-## 10. Prueba de usabilidad
-
-*COMPLETAR con los resultados reales de `docs/ciclo4_usabilidad.md`: número de usuarios, cuántos completaron las cuatro tareas sin ayuda, problemas encontrados y cambios aplicados.*
-
-## 11. Lecciones aprendidas
-
-*COMPLETAR en la reunión de cierre. Preguntas guía:*
-
-- ¿Qué habría pasado si hubiéramos usado cascada y diseñado la binaria como solución desde el inicio?
-- ¿Qué riesgo nos costó más identificar?
-- ¿Qué haríamos distinto en la organización del equipo?
-- Del Ciclo 3 al 4: ¿qué cambió al detectar que la interfaz no se entendía y que incumplía R-02?
-
-## 12. Conclusión
+## 10. Conclusión
 
 El modelo en espiral fue adecuado para este problema porque su mayor riesgo, elegir una estrategia que parece correcta pero no lo es, se podía detectar barato y temprano. El Ciclo 2 lo demostró: un prototipo de pocas horas descartó la binaria antes de comprometer el diseño final. El Ciclo 3 volvió a mostrar su valor: al revisar el prototipo aparecieron dos problemas (la interfaz no se entendía y no cumplía una restricción), y el Ciclo 4 los corrigió antes de entregar. El resultado es un producto correcto y verificado, con cada decisión documentada y rastreable.
